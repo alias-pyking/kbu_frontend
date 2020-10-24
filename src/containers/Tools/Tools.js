@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from '../../axios-kbu';
+import {Container, Grid} from "semantic-ui-react";
 
 class Tools extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            tools:[],
-        }
+    state = {
+        tools:[],
+        loading:true,
     }
 
     async componentDidMount() {
@@ -14,8 +13,9 @@ class Tools extends Component{
             const res = await axios.get('/tools');
             this.setState(previousState => {
                 return {
-                    ...this.state,
-                    tools: res.data
+                    ...previousState,
+                    tools: res.data,
+                    loading:false,
                 }
             });
         } catch (err) {
@@ -24,10 +24,21 @@ class Tools extends Component{
     }
 
     render() {
+        const { loading } = this.state;
+        let tools = null;
+        if(loading){
+            tools = <p>Loading</p>
+        } else{
+            tools = this.state.tools.map(tool => (
+                <Grid.Column>
+                    
+                </Grid.Column>
+            ))
+        }
+
         return(
-            <div>
-                Tools Page
-            </div>
+            <Grid relaxed columns={4}>
+            </Grid>
         )
     }
 }
