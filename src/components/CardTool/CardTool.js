@@ -1,12 +1,8 @@
 import React from 'react';
 import { Card, Image } from "semantic-ui-react";
+import { getTimeAgo } from '../../utilities/util';
+import { Link } from "react-router-dom";
 
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
-import {Link} from "react-router-dom";
-TimeAgo.addDefaultLocale(en);
-
-const timeAgo = new TimeAgo('en-US');
 
 function cardTool(props){
 
@@ -26,7 +22,7 @@ function cardTool(props){
             <Card.Content>
                 <Card.Header className='theme-color'>{ props.name }</Card.Header>
                 <Card.Meta>
-                    <span className='date'>Added {timeAgo.format(new Date(props.timestamp))}</span>
+                    <span className='date'>Added {getTimeAgo(props.timestamp)}</span>
                 </Card.Meta>
                 <Card.Description>
                     {description}

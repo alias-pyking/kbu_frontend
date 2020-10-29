@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from '../../axios-kbu';
 import Loader from '../../components/Loader/Loader';
-import {Button, Container, Label, LabelGroup} from "semantic-ui-react";
+import { Button, Container, Label, LabelGroup} from "semantic-ui-react";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import styles from './ToolDetail.module.css';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import Reviews from "../Reviews/Reviews";
 
 class ToolDetail extends Component {
 
@@ -17,7 +18,7 @@ class ToolDetail extends Component {
         quantity:null,
         cost: null,
         status:'',
-        reviewUrl:'',
+        reviews:'',
         timestamp:null,
         loading:true,
     }
@@ -41,7 +42,7 @@ class ToolDetail extends Component {
                     cost: data.cost,
                     status: data.status,
                     timestamp:data.timestamp,
-                    reviewsUrl:data.reviews,
+                    reviews:data.reviews,
                     loading:false,
                 }
             });
@@ -90,10 +91,12 @@ class ToolDetail extends Component {
                             <Button fluid size={'huge'} color={'teal'} as={Link} to={`/tools/${state.id}/rent`}>Rent</Button>
                         </div>
                     </Container>
+                    <br></br>
+                    <br></br>
                     <Container>
                         <div className={styles.stickHeader}>
                             <h2>Reviews</h2>
-
+                            <Reviews reviewsUrl={state.reviews}/>
                         </div>
                     </Container>
                 </>
