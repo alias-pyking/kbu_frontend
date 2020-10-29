@@ -31,7 +31,7 @@ export const logout = ()=>{
     }
 }
 
-checkAuthTimeout = expirationTime =>{
+export const checkAuthTimeout = expirationTime =>{
     return dispatch =>{
         setTimeout(()=>{
             dispatch(logout());
@@ -46,7 +46,7 @@ export const authLogin = (username,password)=>{
             username: username,
             password: password
         })
-        .then(res=>{
+        .then( res =>{
             const token = res.data.key;
             const expirationDate = new Date(new Date().getTime()+3600*1000);
             localStorage.setItem('token',token);
@@ -69,7 +69,7 @@ export const authSignup = (username,email,password1,password2)=>{
             password1: password1,
             password2: password2
         })
-        .then(res=>{
+        .then (res=>{
             const token = res.data.key;
             const expirationDate = new Date(new Date().getTime()+3600*1000);
             localStorage.setItem('token',token);

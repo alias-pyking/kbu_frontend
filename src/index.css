@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.theme-color{
+  color: #00b5ad!important;
+}
+@import "~react-image-gallery/styles/css/image-gallery.css";
