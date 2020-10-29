@@ -1,7 +1,9 @@
 import React from 'react';
 import { Card, Image } from "semantic-ui-react";
-import { getTimeAgo } from '../../utilities/util';
-import { Link } from "react-router-dom";
+import {getTimeAgo} from '../../utilities/util';
+import {Link} from "react-router-dom";
+
+
 
 
 function cardTool(props){
@@ -17,10 +19,6 @@ function cardTool(props){
         description = description + '...';
     }
     return (
-        <Card>
-            <Image src={ props.thumb } wrapped ui={false}/>
-            <Card.Content>
-                <Card.Header>{ props.name }</Card.Header>
         <Card as={Link} to={`/tools/${props.id}`}>
             <Image src={ props.thumb } wrapped ui={false}/>
             <Card.Content>
