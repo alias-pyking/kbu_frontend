@@ -6,8 +6,12 @@ import {compose} from 'redux';
 import Tools from "./containers/Tools/Tools";
 import Home from "./components/Home";
 import About from './components/About/About';
+<<<<<<< HEAD
 import * as action from './store/actions/auth';
 
+=======
+import ToolDetail from "./containers/ToolDetail/ToolDetail";
+>>>>>>> e2671f96a7e3a3c609e2e2bd027ef3497855ce52
 
 class App extends React.Component {
    
@@ -20,6 +24,8 @@ class App extends React.Component {
         <Switch>
             <Route path='/' component={Home} exact />
             <Route exact path='/tools' component={Tools} />
+            <Route exact path='/tools/:id' component={ToolDetail} />
+
             <Route exact path='/about' component={About} />
         </Switch>
 
