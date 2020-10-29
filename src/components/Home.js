@@ -1,7 +1,9 @@
 import React from "react";
 import './Home.css';
-import logo from './logo.png';
+import logo from '../assets/logo.png';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+
+
 class home extends React.Component {
     constructor(props){
         super(props);
@@ -78,12 +80,6 @@ class home extends React.Component {
           </Button>
         </Segment>
       </Form>
-      
-
-
-
-
-
       
       <Message>
         Already having an account <Button onClick={this.onFlagChange}>Sign In</Button>
