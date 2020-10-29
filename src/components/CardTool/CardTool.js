@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Image } from "semantic-ui-react";
-import {getTimeAgo} from '../../utilities/util';
-import {Link} from "react-router-dom";
+import { getTimeAgo } from '../../utilities/util';
+import { Link } from "react-router-dom";
 
 
 
