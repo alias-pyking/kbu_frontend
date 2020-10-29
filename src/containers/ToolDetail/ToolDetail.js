@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from '../../axios-kbu';
 import Loader from '../../components/Loader/Loader';
-import {CardHeader} from "semantic-ui-react";
+import {Card, CardHeader} from "semantic-ui-react";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
-
+import styles from './ToolDetail.module.css';
 
 class ToolDetail extends Component {
 
@@ -57,11 +57,14 @@ class ToolDetail extends Component {
         } else{
             tool = (
                 <div>
-                    <CardHeader>
+                    <div className={styles.toolHeader}>
                         <h2>{ state.name }</h2>
-                    </CardHeader>
+                    </div>
                     <div>
                         <ImageSlider images={state.images}/>
+                    </div>
+                    <div>
+
                     </div>
                 </div>
             )
