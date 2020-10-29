@@ -1,14 +1,21 @@
 import React from 'react';
 import Layout from './components/Layout/Layout';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 import Tools from "./containers/Tools/Tools";
 import Home from "./components/Home";
 import About from './components/About/About';
+import * as action from './store/actions/auth';
 
 
+class App extends React.Component {
+   
+    componentDidMount(){
+        this.props.onTryAutoSignup();
+    }
 
-function App() {
-    const routes = (
+     routes = (
      
         <Switch>
             <Route path='/' component={Home} exact />
@@ -17,11 +24,28 @@ function App() {
         </Switch>
 
     )
-    return (
-          <Layout>
-              {routes}
-          </Layout>
-      );
+    render()
+    {return (
+        <Layout>
+            {this.routes}
+        </Layout>
+    );}
+    
+}
+ const mapStateToProps = state =>{
+    return{
+       isAuthenticated:state.token !==null 
+    }
 }
 
-export default withRouter(App);
+const mapDispatchToProps = dispatch =>{
+    return{
+        onTryAutoSignup: ()=> dispatch(action.authCheckState())
+    }
+}
+
+// export default withRouter(App);
+const ShowTheLocationWithRouter = withRouter(App);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowTheLocationWithRouter);
+// export default compose(withRouter,connect(mapStateToProps,mapDispatchToProps)(App)) ;

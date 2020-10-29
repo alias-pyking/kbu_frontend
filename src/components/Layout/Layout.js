@@ -4,6 +4,7 @@ import {Container} from "semantic-ui-react";
 
 
 const layout = (props) => (
+    
     <Container fluid>
         <NavBar/>
         {props.children}
