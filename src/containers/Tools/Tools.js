@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from '../../axios-kbu';
-import { Grid } from "semantic-ui-react";
+import {Container, Grid} from "semantic-ui-react";
 import CardTool from '../../components/CardTool/CardTool';
 import Loader from '../../components/Loader/Loader';
 
@@ -45,9 +45,11 @@ class Tools extends Component{
         }
 
         return(
-            <Grid relaxed columns={4}>
-                {tools}
-            </Grid>
+            <Container>
+                <Grid relaxed columns={4}>
+                    {tools}
+                </Grid>
+            </Container>
         )
     }
 }
