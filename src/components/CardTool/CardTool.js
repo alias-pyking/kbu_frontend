@@ -1,8 +1,9 @@
 import React from 'react';
-import { Card, Image } from "semantic-ui-react";
+import { Card, Image, Rating } from "semantic-ui-react";
 
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+
 TimeAgo.addDefaultLocale(en);
 
 const timeAgo = new TimeAgo('en-US');
@@ -24,8 +25,9 @@ function cardTool(props){
             <Image src={ props.thumb } wrapped ui={false}/>
             <Card.Content>
                 <Card.Header>{ props.name }</Card.Header>
-                <Card.Meta>
+                <Card.Meta >
                     <span className='date'>Added {timeAgo.format(new Date(props.timestamp))}</span>
+                    <Rating icon='star' defaultRating={3.5}  maxRating={5} disabled/>
                 </Card.Meta>
                 <Card.Description>
                     {description}
