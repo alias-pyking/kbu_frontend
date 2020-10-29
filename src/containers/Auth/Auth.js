@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
 import logo from "../../assets/logo.png";
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/auth';
+
 
 class Auth extends Component {
     constructor(props) {
@@ -60,7 +63,7 @@ class Auth extends Component {
                             </Header>
 
                             <Form size='large'>
-                                <Segment Raised>
+                                <Segment raised>
                                     <Form.Input
                                         placeholder='Full Name'
                                         size='huge' id="Name"
@@ -95,7 +98,7 @@ class Auth extends Component {
         }
 
         return (
-            <div class="ui huge form">
+            <div className="ui huge form">
                 <Grid textAlign='center' style={{height: '70vh'}} verticalAlign='middle'>
                     <Grid.Column style={{maxWidth: 450}}>
                         <Header as='h2' color='teal' textAlign='center'>
@@ -103,7 +106,7 @@ class Auth extends Component {
                         </Header>
 
                         <Form size='large'>
-                            <Segment Raised>
+                            <Segment raised>
                                 <Form.Input
                                     fluid icon='user'
                                     iconPosition='left'
@@ -132,7 +135,8 @@ class Auth extends Component {
                         </Message>
                     </Grid.Column>
                 </Grid>
-            </div>);
+            </div>
+        );
 
 
     }

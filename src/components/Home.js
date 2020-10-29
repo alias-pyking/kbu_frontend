@@ -1,12 +1,14 @@
 import React from "react";
 import './Home.css';
-import { connect } from 'react-redux';
-import logo from '../assets/logo.png';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import * as actions from '../store/actions/auth';
-
-class home extends React.Component {
 
 
+class Home extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>Home</h1>
+            </div>
+        );
+    }
 }
-export default home;
+export default Home;
