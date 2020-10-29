@@ -1,4 +1,4 @@
-.toolHeader{
+.stickHeader{
     position: sticky;
     left: 0;
     top: 0;
@@ -6,4 +6,10 @@
     padding:10px;
     z-index: 2;
     box-sizing: border-box;
+}
+
+.toolMeta{
+    padding:5px;
+    display: flex;
+    margin:10px;
 }
