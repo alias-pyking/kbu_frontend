@@ -10,6 +10,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './store/reducers/auth';
 import './index.css';
+import { AuthProvider } from "./contexts/AuthContext";
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__||compose
 
@@ -20,11 +21,11 @@ const store = createStore(reducer,composeEnhances(
 
 
 ReactDOM.render(
-  <Provider store={store}>
+  <AuthProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-  </Provider>,
+  </AuthProvider>,
   document.getElementById('root')
 );
 

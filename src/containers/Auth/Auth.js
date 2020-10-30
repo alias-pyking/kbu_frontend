@@ -1,118 +1,66 @@
-import React, {Component} from "react";
-import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
+import React, {Component, useState} from "react";
+import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
 import logo from "../../assets/logo.png";
-import { connect } from 'react-redux';
-import * as actions from '../../store/actions/auth';
+import { useAuth } from '../../contexts/AuthContext';
 
 
-class Auth extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            signInEmail: '',
-            signInPassword: '',
-            flag: false,
-            name: '',
-            password: '',
-            ReEnterPassword: '',
-            email: ''
-        }
+function Auth(){
+    const [username, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password1, setPassword1] = useState('');
+    const [password2, setPassword2] = useState('');
+    const [flag, setFlag] = useState(true);
+    function onEmailChange(event){
+        setEmail(event.target.value);
     }
 
-    onEmailChange = (event) => {
-        this.setState({signInEmail: event.target.value})
+    function onUserNameChange(event){
+        setUserName(event.target.value);
+    }
+    function onPasswordChange1(event){
+        setPassword1(event.target.value);
     }
 
-    onPasswordChange = (event) => {
-        this.setState({signInPassword: event.target.value})
+    function onPasswordChange2(event){
+        setPassword2(event.target.value);
     }
 
-    onFlagChange = () => {
-        this.setState({flag: !this.state.flag})
+    function onFlagChange(){
+        setFlag(!flag)
     }
 
-    onSetName = (event) => {
-        this.setState({name: event.target.value})
+    const { login, signUp } = useAuth();
+
+    function registerUser(ev){
+        ev.preventDefault();
+        signUp(username, email, password1, password2);
     }
 
-    onSetEmail = (event) => {
-        this.setState({email: event.target.value})
+    function onSubmitSignIn(ev){
+        ev.preventDefault();
+        console.log('logging in');
+        login(username, password1);
     }
-
-    onSetPassword = (event) => {
-        this.setState({password: event.target.value})
-    }
-
-    RegisterUser = () => {
-
-    }
-    onSubmitSignIn = () => {
-
-    }
-
-    render() {
-
-        const {flag} = this.state;
-        if (flag) {
-            return (
-                <div className="ui huge form">
-                    <Grid textAlign='center' style={{height: '70vh'}} verticalAlign='middle'>
-                        <Grid.Column style={{maxWidth: 450}}>
-                            <Header as='h2' color='teal' textAlign='center'>
-                                <img src={logo} alt='something'/> Register!
-                            </Header>
-
-                            <Form size='large'>
-                                <Segment raised>
-                                    <Form.Input
-                                        placeholder='Full Name'
-                                        size='huge' id="Name"
-                                        onChange={this.onSetName}/>
-                                    <Form.Input
-                                        placeholder='E-mail address'
-                                        size='huge' id="email-address"
-                                        onChange={this.onSetEmail}/>
-                                    <Form.Input
-                                        fluid
-                                        icon='lock'
-                                        iconPosition='left'
-                                        placeholder='Password'
-                                        type='password'
-                                        size='huge'
-                                        id="password"
-                                        onChange={this.onSetPassword}
-                                    />
-                                    <Button color='teal' fluid size='huge' onClick={this.RegisterUser}>
-                                        Register
-                                    </Button>
-                                </Segment>
-                            </Form>
-
-                            <Message>
-                                Already having an account <Button onClick={this.onFlagChange}>Sign In</Button>
-                            </Message>
-                        </Grid.Column>
-                    </Grid>
-                </div>
-            );
-        }
-
+    if (flag) {
         return (
             <div className="ui huge form">
                 <Grid textAlign='center' style={{height: '70vh'}} verticalAlign='middle'>
                     <Grid.Column style={{maxWidth: 450}}>
                         <Header as='h2' color='teal' textAlign='center'>
-                            <img src={logo} alt='kbu-logo'/> Log-in to your account
+                            <img src={logo} alt='something'/> Register!
                         </Header>
 
                         <Form size='large'>
                             <Segment raised>
                                 <Form.Input
-                                    fluid icon='user'
-                                    iconPosition='left'
+                                    placeholder='username'
+                                    size='huge' id="username"
+                                    onChange={onUserNameChange}/>
+                                <Form.Input
+                                    type='email'
                                     placeholder='E-mail address'
                                     size='huge' id="email-address"
-                                    onChange={this.onEmailChange}/>
+                                    onChange={onEmailChange}/>
                                 <Form.Input
                                     fluid
                                     icon='lock'
@@ -120,26 +68,75 @@ class Auth extends Component {
                                     placeholder='Password'
                                     type='password'
                                     size='huge'
-                                    id="password"
-                                    onChange={this.onPasswordChange}
+                                    id="password1"
+                                    onChange={onPasswordChange1}
                                 />
-
-                                <Button color='teal' fluid size='huge' onClick={this.onSubmitSignIn}>
-                                    Login
+                                <Form.Input
+                                    fluid
+                                    icon='lock'
+                                    iconPosition='left'
+                                    placeholder='Confirm Password'
+                                    type='password'
+                                    size='huge'
+                                    id="password2"
+                                    onChange={onPasswordChange2}
+                                />
+                                <Button color='teal' fluid size='huge' onClick={registerUser}>
+                                    Register
                                 </Button>
                             </Segment>
                         </Form>
 
                         <Message>
-                            New to us? <Button onClick={this.onFlagChange}>Sign Up</Button>
+                            Already having an account <Button onClick={onFlagChange}>Sign In</Button>
                         </Message>
                     </Grid.Column>
                 </Grid>
             </div>
         );
-
-
     }
+
+    return (
+        <div className="ui huge form">
+            <Grid textAlign='center' style={{height: '70vh'}} verticalAlign='middle'>
+                <Grid.Column style={{maxWidth: 450}}>
+                    <Header as='h2' color='teal' textAlign='center'>
+                        <img src={ logo } alt='kbu-logo'/> Log-in to your account
+                    </Header>
+
+                    <Form size='large'>
+                        <Segment raised>
+                            <Form.Input
+                                fluid icon='user'
+                                iconPosition='left'
+                                placeholder='username'
+                                required
+                                size='huge' id="username"
+                                onChange={onUserNameChange}/>
+                            <Form.Input
+                                fluid
+                                icon='lock'
+                                iconPosition='left'
+                                placeholder='Password'
+                                type='password'
+                                size='huge'
+                                id="password"
+                                onChange={onPasswordChange1}
+                            />
+
+                            <Button color='teal' fluid size='huge' onClick={onSubmitSignIn}>
+                                Login
+                            </Button>
+                        </Segment>
+                    </Form>
+
+                    <Message>
+                        New to us? <Button onClick={onFlagChange}>Sign Up</Button>
+                    </Message>
+                </Grid.Column>
+            </Grid>
+        </div>
+    );
 }
 
 export default Auth;

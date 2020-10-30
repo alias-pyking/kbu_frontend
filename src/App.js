@@ -14,9 +14,9 @@ import Auth from "./containers/Auth/Auth";
 
 class App extends React.Component {
    
-    componentDidMount(){
-        this.props.onTryAutoSignup();
-    }
+    // componentDidMount(){
+    //     this.props.onTryAutoSignup();
+    // }
 
      routes = (
      
@@ -33,28 +33,29 @@ class App extends React.Component {
         </Switch>
 
     )
-    render()
-    {return (
-        <Layout>
-            {this.routes}
-        </Layout>
-    );}
+    render() {
+        return (
+            <Layout>
+                {this.routes}
+            </Layout>
+        );
+    }
     
 }
- const mapStateToProps = state =>{
-    return{
-       isAuthenticated:state.token !==null 
-    }
-}
-
-const mapDispatchToProps = dispatch =>{
-    return{
-        onTryAutoSignup: ()=> dispatch(action.authCheckState())
-    }
-}
+//  const mapStateToProps = state =>{
+//     return{
+//        isAuthenticated:state.token !==null
+//     }
+// }
+//
+// const mapDispatchToProps = dispatch =>{
+//     return{
+//         onTryAutoSignup: ()=> dispatch(action.authCheckState())
+//     }
+// }
 
 // export default withRouter(App);
-const ShowTheLocationWithRouter = withRouter(App);
+// const ShowTheLocationWithRouter = withRouter(App);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowTheLocationWithRouter);
+export default App;
 // export default compose(withRouter,connect(mapStateToProps,mapDispatchToProps)(App)) ;
