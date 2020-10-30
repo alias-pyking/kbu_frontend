@@ -8,7 +8,7 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-    const { currentToken, setCurrentToken} = useState();
+    const [token, setToken] = useState('');
 
     async function login(username, password){
         try{
@@ -18,8 +18,10 @@ export const AuthProvider = ({ children }) => {
             }
             const res = await axios.post('/auth/login/',{...data});
             console.log(res);
-            const { key } = res;
-            setCurrentToken(key);
+            const { key } = res.data;
+            localStorage.setItem('token',key);
+            localStorage.setItem('user',username);
+            setToken(key);
         } catch (err) {
             console.log(err);
         }
@@ -34,14 +36,16 @@ export const AuthProvider = ({ children }) => {
                 password2
             }
             const res = await axios.post('auth/registration/',{...data});
-            console.log(res);
+            const { key } = res.data;
+            localStorage.setItem('token',key);
+            localStorage.setItem('user',username);
         } catch (err) {
             console.log(err);
         }
     }
 
     const value = {
-        currentToken,
+        token,
         login,
         signUp,
     }

@@ -10,6 +10,9 @@ function Auth(){
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
     const [flag, setFlag] = useState(true);
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
     function onEmailChange(event){
         setEmail(event.target.value);
     }
@@ -31,16 +34,34 @@ function Auth(){
 
     const { login, signUp } = useAuth();
 
-    function registerUser(ev){
+    async function registerUser(ev){
         ev.preventDefault();
-        signUp(username, email, password1, password2);
+        if(password1 !== password2){
+            return setError('Passwords do not match');
+        }
+        setError('');
+        try{
+            setLoading(true);
+            await signUp(username, email, password1, password2);
+        } catch (err){
+            setError('Unable to create new user');
+        }
+        setLoading(false);
     }
 
-    function onSubmitSignIn(ev){
+   async function onSubmitSignIn(ev){
         ev.preventDefault();
         console.log('logging in');
-        login(username, password1);
+        try{
+            setLoading(true);
+            setError('');
+            await login(username, password1);
+        } catch (err) {
+            console.log('Auth.js 52', err);
+        }
+        setLoading(false);
     }
+
     if (flag) {
         return (
             <div className="ui huge form">
@@ -88,7 +109,7 @@ function Auth(){
                         </Form>
 
                         <Message>
-                            Already having an account <Button onClick={onFlagChange}>Sign In</Button>
+                            Already having an account <Button disabled={loading} onClick={onFlagChange}>Sign In</Button>
                         </Message>
                     </Grid.Column>
                 </Grid>
@@ -124,7 +145,7 @@ function Auth(){
                                 onChange={onPasswordChange1}
                             />
 
-                            <Button color='teal' fluid size='huge' onClick={onSubmitSignIn}>
+                            <Button disabled={loading} color='teal' fluid size='huge' onClick={onSubmitSignIn}>
                                 Login
                             </Button>
                         </Segment>
