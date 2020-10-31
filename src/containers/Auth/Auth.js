@@ -1,11 +1,13 @@
 import React, {Component, useState} from "react";
-import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
+import {Button, Form, Grid, Header, Label, Message, Segment} from "semantic-ui-react";
 import logo from "../../assets/logo.png";
 import { useAuth } from '../../contexts/AuthContext';
+import { Error } from "../../components/Error/Error";
 
 
 function Auth(){
     const [username, setUserName] = useState('');
+    const [usernameError, setUserNameError] = useState(null);
     const [email, setEmail] = useState('');
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
@@ -34,7 +36,7 @@ function Auth(){
 
     const { login, signUp } = useAuth();
 
-    async function registerUser(ev){
+    async function onSubmitRegister(ev){
         ev.preventDefault();
         if(password1 !== password2){
             return setError('Passwords do not match');
@@ -44,7 +46,8 @@ function Auth(){
             setLoading(true);
             await signUp(username, email, password1, password2);
         } catch (err){
-            setError('Unable to create new user');
+            console.log(err);
+            setError('user with username or email already exists');
         }
         setLoading(false);
     }
@@ -57,7 +60,8 @@ function Auth(){
             setError('');
             await login(username, password1);
         } catch (err) {
-            console.log('Auth.js 52', err);
+            console.log(err);
+            setError('Either username does not exists or username/password is incorrect');
         }
         setLoading(false);
     }
@@ -67,23 +71,33 @@ function Auth(){
             <div className="ui huge form">
                 <Grid textAlign='center' style={{height: '70vh'}} verticalAlign='middle'>
                     <Grid.Column style={{maxWidth: 450}}>
+                        {error ? <Error error={error}/>:''}
                         <Header as='h2' color='teal' textAlign='center'>
                             <img src={logo} alt='something'/> Register!
                         </Header>
 
-                        <Form size='large'>
+                        <Form size='large'  onSubmit={onSubmitRegister}>
                             <Segment raised>
                                 <Form.Input
+                                    fluid
+                                    icon='user'
+                                    iconPosition='left'
+                                    required={true}
                                     placeholder='username'
                                     size='huge' id="username"
                                     onChange={onUserNameChange}/>
                                 <Form.Input
+                                    fluid
+                                    icon='mail'
+                                    iconPosition='left'
+                                    required={true}
                                     type='email'
                                     placeholder='E-mail address'
                                     size='huge' id="email-address"
                                     onChange={onEmailChange}/>
                                 <Form.Input
                                     fluid
+                                    required={true}
                                     icon='lock'
                                     iconPosition='left'
                                     placeholder='Password'
@@ -94,6 +108,7 @@ function Auth(){
                                 />
                                 <Form.Input
                                     fluid
+                                    required
                                     icon='lock'
                                     iconPosition='left'
                                     placeholder='Confirm Password'
@@ -102,7 +117,7 @@ function Auth(){
                                     id="password2"
                                     onChange={onPasswordChange2}
                                 />
-                                <Button color='teal' fluid size='huge' onClick={registerUser}>
+                                <Button color='teal' fluid size='huge' type={'submit'}>
                                     Register
                                 </Button>
                             </Segment>
@@ -121,31 +136,33 @@ function Auth(){
         <div className="ui huge form">
             <Grid textAlign='center' style={{height: '70vh'}} verticalAlign='middle'>
                 <Grid.Column style={{maxWidth: 450}}>
+                    {error ? <Error error={error}/>:''}
                     <Header as='h2' color='teal' textAlign='center'>
                         <img src={ logo } alt='kbu-logo'/> Log-in to your account
                     </Header>
 
-                    <Form size='large'>
+                    <Form size='large' onSubmit={onSubmitSignIn}>
                         <Segment raised>
                             <Form.Input
                                 fluid icon='user'
                                 iconPosition='left'
                                 placeholder='username'
-                                required
+                                required={true}
                                 size='huge' id="username"
                                 onChange={onUserNameChange}/>
                             <Form.Input
                                 fluid
+                                required={true}
                                 icon='lock'
                                 iconPosition='left'
-                                placeholder='Password'
+                                 placeholder='Password'
                                 type='password'
                                 size='huge'
                                 id="password"
                                 onChange={onPasswordChange1}
                             />
 
-                            <Button disabled={loading} color='teal' fluid size='huge' onClick={onSubmitSignIn}>
+                            <Button disabled={loading} color='teal' fluid size='huge' type={'submit'}>
                                 Login
                             </Button>
                         </Segment>

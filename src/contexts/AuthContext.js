@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('user',username);
             setToken(key);
         } catch (err) {
-            console.log(err);
+            return Promise.reject(err);
         }
     }
 
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('token',key);
             localStorage.setItem('user',username);
         } catch (err) {
-            console.log(err);
+            return Promise.reject(err);
         }
     }
 
