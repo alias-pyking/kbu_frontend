@@ -1,13 +1,12 @@
-import React, {Component, useState} from "react";
-import {Button, Form, Grid, Header, Label, Message, Segment} from "semantic-ui-react";
+import React, { useState} from "react";
+import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
 import logo from "../../assets/logo.png";
 import { useAuth } from '../../contexts/AuthContext';
 import { Error } from "../../components/Error/Error";
-
+import { useHistory } from 'react-router-dom';
 
 function Auth(){
     const [username, setUserName] = useState('');
-    const [usernameError, setUserNameError] = useState(null);
     const [email, setEmail] = useState('');
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
@@ -35,6 +34,8 @@ function Auth(){
     }
 
     const { login, signUp } = useAuth();
+    const history = useHistory();
+
 
     async function onSubmitRegister(ev){
         ev.preventDefault();
@@ -45,6 +46,7 @@ function Auth(){
         try{
             setLoading(true);
             await signUp(username, email, password1, password2);
+            history.push('/');
         } catch (err){
             console.log(err);
             setError('user with username or email already exists');
@@ -59,6 +61,7 @@ function Auth(){
             setLoading(true);
             setError('');
             await login(username, password1);
+            history.push('/');
         } catch (err) {
             console.log(err);
             setError('Either username does not exists or username/password is incorrect');
@@ -117,7 +120,7 @@ function Auth(){
                                     id="password2"
                                     onChange={onPasswordChange2}
                                 />
-                                <Button color='teal' fluid size='huge' type={'submit'}>
+                                <Button disabled={loading} color='teal' fluid size='huge' type={'submit'}>
                                     Register
                                 </Button>
                             </Segment>

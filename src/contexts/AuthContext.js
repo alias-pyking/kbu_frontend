@@ -9,6 +9,8 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState('');
+    const [user, setUser] = useState('');
+    const [loding, setLoading] = useState(true);
 
     async function login(username, password){
         try{
@@ -22,6 +24,8 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('token',key);
             localStorage.setItem('user',username);
             setToken(key);
+            setUser(username);
+            setLoading(false);
         } catch (err) {
             return Promise.reject(err);
         }
@@ -39,15 +43,27 @@ export const AuthProvider = ({ children }) => {
             const { key } = res.data;
             localStorage.setItem('token',key);
             localStorage.setItem('user',username);
+            setLoading(false);
         } catch (err) {
             return Promise.reject(err);
         }
     }
 
+    async function logout(){
+        try{
+            return new Promise();
+        }
+        catch (err){
+            return new Promise.reject('some err');
+        }
+    }
+
     const value = {
         token,
+        user,
         login,
         signUp,
+        logout,
     }
     return(
         <AuthContext.Provider value={value}>

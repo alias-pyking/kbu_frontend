@@ -11,6 +11,7 @@ import * as action from './store/actions/auth';
 import ToolDetail from "./containers/ToolDetail/ToolDetail";
 import Reviews from "./containers/Reviews/Reviews";
 import Auth from "./containers/Auth/Auth";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 class App extends React.Component {
    
@@ -21,7 +22,7 @@ class App extends React.Component {
      routes = (
      
         <Switch>
-            <Route path='/' component={Home} exact />
+            <PrivateRoute path='/' component={Home} exact />
 
             <Route exact path='/tools' component={Tools} />
             <Route exact path='/tools/:toolId' component={ToolDetail} />
