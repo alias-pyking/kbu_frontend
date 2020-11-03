@@ -8,7 +8,9 @@ const layout = (props) => (
     
     <Container fluid>
         <NavBar/>
-        {props.children}
+        <div style={{minHeight:"80vh"}}>
+        {   props.children}
+        </div>
         <Footer/>
     </Container>
 );
