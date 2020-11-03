@@ -1,30 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
-import {createStore,compose,applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
-import reducer from './store/reducers/auth';
+// import { BrowserRouter } from 'react-router-dom';
+// import {createStore,compose,applyMiddleware} from 'redux';
+// import {Provider} from 'react-redux';
+// import thunk from 'redux-thunk';
+// import reducer from './store/reducers/auth';
 import './index.css';
-import { AuthProvider } from "./contexts/AuthContext";
-
-const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__||compose
-
-const store = createStore(reducer,composeEnhances(
-  applyMiddleware(thunk)
-));
-
+import {BrowserRouter} from "react-router-dom";
+import {AuthProvider} from "./contexts/AuthContext";
+import Layout from "./components/Layout/Layout";
 
 
 ReactDOM.render(
-  <AuthProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-  </AuthProvider>,
+<BrowserRouter>
+    <App/>
+</BrowserRouter>,
   document.getElementById('root')
 );
 

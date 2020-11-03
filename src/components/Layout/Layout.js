@@ -8,7 +8,7 @@ const layout = (props) => (
     
     <Container fluid>
         <NavBar/>
-        <div style={{minHeight:"80vh"}}>
+        <div style={{minHeight:"80vh", overflowY:"auto"}}>
         {   props.children}
         </div>
         <Footer/>
