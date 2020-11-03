@@ -1,12 +1,18 @@
-.main-footer {
+.footer{
+    padding-left: 10%;
     color: white;
     background-color: #000000;
-    padding-top: 3em;
+    /* padding-top: 3em; */
     position: relative;
     bottom: 0;
     width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   li{
-      font-size: 20px;
+      list-style-type: none;
+      font-size: 15px;
+  }
+  h4{
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
