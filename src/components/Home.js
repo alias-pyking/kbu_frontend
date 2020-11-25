@@ -1,137 +1,97 @@
-import React from "react";
-import './Home.css';
-import { connect } from 'react-redux';
-import logo from '../assets/logo.png';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import * as actions from '../store/actions/auth';
+import React, { Component } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import banner from '../assets/1.jpg';
+// import Card from './card';
+import Cardlist from './cardlist';
+import banner2 from '../assets/banner2.jpg';
+import banner1 from '../assets/banner1.jpg';
+import './Homepg.css';
 
-class home extends React.Component {
-    constructor(props){
-        super(props);
-        this.state={
-            signInEmail:'',
-            signInPassword:'',
-            flag:false,
-            name:'',
-            password:'',
-            ReEnterPassword:'',
-            email:''
-        }
-    }
-    onEmailChange=(event)=>{
-        this.setState({signInEmail:event.target.value})
-    }
-    onPasswordChange=(event)=>{
-        this.setState({signInPassword:event.target.value})
-    }
-    onFlagChange=()=>{
-        this.setState({flag:!this.state.flag})
-    }
-    onSetName=(event)=>{
-        this.setState({name:event.target.value})
-    }
-    onSetEmail=(event)=>{
-        this.setState({email:event.target.value})
-    }
-    onSetPassword=(event)=>{
-        this.setState({password:event.target.value})
-    }
-    
-    RegisterUser=()=>{
 
-    }
-    onSubmitSignIn=()=>{
-        
-    }
 
-    render(){
-        const fg = this.state.flag;
-        if(fg===true)
-    {return (
-        <div class="ui huge form">
-        <Grid textAlign='center' style={{ height: '70vh' }} verticalAlign='middle'>
-        <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as='h2' color='teal' textAlign='center'>
-        <img src={logo} /> Register!
-      </Header>
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background:  '#00b5ad' }}
+      onClick={onClick}
+    />
+  );
+}
 
-      <Form size='large'>
-        <Segment Raised>
-        <Form.Input 
-          placeholder='Full Name' 
-          size='huge' id="Name" 
-          onChange={this.onSetName}/>
-          <Form.Input 
-          placeholder='E-mail address' 
-          size='huge' id="email-address" 
-          onChange={this.onSetEmail}/>
-          <Form.Input
-            fluid
-            icon='lock'
-            iconPosition='left'
-            placeholder='Password'
-            type='password'
-            size='huge'
-            id="password"
-            onChange={this.onSetPassword}
-          />
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
 
-          <Button color='teal' fluid size='huge' onClick={this.RegisterUser}>
-            Register
-          </Button>
-        </Segment>
-      </Form>
+      className={className}
+      style={{ ...style, display: "block", background: '#00b5ad' }}
+      onClick={onClick}
+    />
+  );
+}
+
+export default class SimpleSlider extends Component {
+  render() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      // speed: 2000,
+      autoplaySpeed: 2000,
+      cssEase: "linear",
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
       
-      <Message>
-        Already having an account <Button onClick={this.onFlagChange}>Sign In</Button>
-      </Message>
-      </Grid.Column>
-        </Grid>
-    </div>
-    );}
-
+    };
     return (
-        <div class="ui huge form">
-        <Grid textAlign='center' style={{ height: '70vh' }} verticalAlign='middle'>
-    <Grid.Column style={{ maxWidth: 450 }}>
-      <Header as='h2' color='teal' textAlign='center'>
-        <img src={logo} /> Log-in to your account
-      </Header>
-
-      <Form size='large'>
-        <Segment Raised>
-          <Form.Input 
-          fluid icon='user' 
-          iconPosition='left'
-          placeholder='E-mail address' 
-          size='huge' id="email-address" 
-          onChange={this.onEmailChange}/>
-          <Form.Input
-            fluid
-            icon='lock'
-            iconPosition='left'
-            placeholder='Password'
-            type='password'
-            size='huge'
-            id="password"
-            onChange={this.onPasswordChange}
-          />
-
-          <Button color='teal' fluid size='huge' onClick={this.onSubmitSignIn}>
-            Login
-          </Button>
-        </Segment>
-      </Form>
+      <div className='box'>
       
-      <Message>
-        New to us? <Button onClick={this.onFlagChange}>Sign Up</Button>
-      </Message>
-    </Grid.Column>
-  </Grid>
-  </div>);
+  <img style={{width: '100%' }} src={banner2}/>
+
+       
+        <Slider {...settings}>
+          <div >
+            <img src='https://imgd.aeplcdn.com/0x0/cw/ec/39048/Audi-etron-Exterior-170076.jpg?wm=0' className='contt'/>
+          </div>
+          <div>
+          <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZWAzJByZS9QJuXW0y1GIfGmOZpMTtdFFmQ&usqp=CAU' className='contt'/>
+          </div>
+          <div>
+          <img src='https://cdn.vox-cdn.com/thumbor/_Uu8gFnGfJ87aPQ0LsjjGzkiMLU=/0x0:675x450/1200x800/filters:focal(284x171:392x279)/cdn.vox-cdn.com/uploads/chorus_image/image/66298585/Untitled_3.0.jpg' className='contt'/>
+          </div>
+          <div>
+          <img src='https://www.businessinsider.in/thumb/msid-77377561,width-640,resizemode-4/Master.jpg' className='contt'/>
+          </div>
+          <div>
+          <img src='https://www.att.com/catalog/en/skus/images/lg-k40-platinum%20gray-450x350.png' className='contt'/>
+          </div>
+          <div>
+          <img src='https://imgd.aeplcdn.com/0x0/cw/ec/39048/Audi-etron-Exterior-170076.jpg?wm=0' className='contt'/>
+          </div>
+        </Slider>
+        <div style={{padding:'25px' }}>
+        <img style={{width: '100%' }} src={banner1}/>
+        </div>
+        
+        <Cardlist/>
 
     
-}
 
+
+     
+      
+
+
+
+
+
+      </div>
+    );
+  }
 }
-export default home;

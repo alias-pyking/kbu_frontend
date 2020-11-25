@@ -9,6 +9,7 @@ const layout = (props) => (
     <Container fluid>
         <NavBar/>
         {props.children}
+       
         <Footer/>
     </Container>
 );

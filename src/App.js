@@ -6,6 +6,7 @@ import {compose} from 'redux';
 import Tools from "./containers/Tools/Tools";
 import Home from "./components/Home";
 import About from './components/About/About';
+import Login from './components/Login';
 import * as action from './store/actions/auth';
 
 import ToolDetail from "./containers/ToolDetail/ToolDetail";
@@ -25,6 +26,7 @@ class App extends React.Component {
             <Route exact path='/tools/:toolId' component={ToolDetail} />
             <Route exact path='/tools/:toolId/reviews' component={Reviews}/>
             <Route exact path='/about' component={About} />
+            <Route exact path='/login' component={Login}/>
         </Switch>
 
     )
