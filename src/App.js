@@ -6,20 +6,16 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Tools from "./containers/Tools/Tools";
 import Home from "./components/Home";
 import About from './components/About/About';
-import Login from './components/Login';
-import * as action from './store/actions/auth';
 
 import ToolDetail from "./containers/ToolDetail/ToolDetail";
 import Reviews from "./containers/Reviews/Reviews";
 import Auth from "./containers/Auth/Auth";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import { useAuth, AuthProvider } from './contexts/AuthContext';
-console.log(useAuth)
+import { AuthProvider } from './contexts/AuthContext';
 function App() {
     const routes = (
 
         <Switch>
-            <PrivateRoute path='/' component={Home} exact/>
+            <Route path='/' component={Home} exact/>
 
             <Route exact path='/tools' component={Tools}/>
             <Route exact path='/tools/:toolId' component={ToolDetail}/>
