@@ -104,3 +104,4 @@ export default class SimpleSlider extends Component {
     );
   }
 }
+export default Home;
