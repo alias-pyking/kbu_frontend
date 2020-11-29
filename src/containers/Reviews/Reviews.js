@@ -22,7 +22,7 @@ class Reviews extends Component {
             this.setState(prevState => {
                 return {
                     ...prevState,
-                    reviews:data,
+                    reviews:data.results,
                     loading:false,
                 }
             });

@@ -2,47 +2,51 @@ import React from 'react';
 import Loader from './Loader/Loader';
 import {Container, Grid} from "semantic-ui-react";
 import CardTool from './CardTool/CardTool';
+import axios from '../axios-kbu';
 
+class CardList extends React.Component {
 
-class Cardlist extends React.Component {
-
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             loading: true,
-            tools:[]
+            tools: []
         }
     }
 
-    componentDidMount(){
-        
-        fetch('https://keepborrowuse.herokuapp.com/tools/')
-    .then(response => response.json())
-    .then(data => this.setState({loading:false,tools:data})).then(()=>console.log(this.state.tools));
-   
-  }
-  render(){
+    async componentDidMount() {
+        try {
+            const res = await axios.get('/tools');
+            this.setState({
+                loading:false,
+                tools:res.data.results,
+            })
+        } catch (err){
+            console.log(err);
+        }
+    }
 
-    const { loading } = this.state;
+    render() {
+        const loading = this.state.loading;
         let tools = null;
-        if(loading){
+        if (loading) {
             tools = <Loader/>;
-        } else{
+        } else {
             tools = this.state.tools.map((tool, index) => (
                 <Grid.Column key={index}>
                     <CardTool
-                    id={tool.id}
-                    cost = {tool.cost}
-                    name={tool.name}
-                    timestamp={tool.timestamp}
-                    thumb={tool.images[0]}
-                    description={tool.description}
+                        id={tool.id}
+                        cost={tool.cost}
+                        name={tool.name}
+                        timestamp={tool.timestamp}
+                        thumb={tool.images[0]}
+                        description={tool.description}
                     />
                 </Grid.Column>
             ))
         }
 
-        return(
+        return (
             <Container>
                 <Grid relaxed columns={3}>
                     {tools}
@@ -51,8 +55,8 @@ class Cardlist extends React.Component {
         )
 
 
-
-  }
+    }
 
 }
-export default Cardlist;
+
+export default CardList;

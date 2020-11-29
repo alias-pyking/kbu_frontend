@@ -16,7 +16,7 @@ class Tools extends Component{
             this.setState(previousState => {
                 return {
                     ...previousState,
-                    tools: res.data,
+                    tools: res.data.results,
                     loading:false,
                 }
             });
