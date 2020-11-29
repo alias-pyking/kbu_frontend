@@ -8,7 +8,11 @@ import Cardlist from './cardlist';
 import banner2 from '../assets/banner2.jpg';
 import banner1 from '../assets/banner1.jpg';
 import './Homepg.css';
-
+import React, {useState} from "react";
+import './Home.css';
+import { useAuth } from '../contexts/AuthContext';
+import { Button } from "semantic-ui-react";
+import { Link, useHistory } from "react-router-dom";
 
 
 function SampleNextArrow(props) {
@@ -33,6 +37,22 @@ function SamplePrevArrow(props) {
     />
   );
 }
+
+
+export default function Home() {
+    const { user, logout } = useAuth();
+    const [error, setError] = useState(null);
+    const history = useHistory();
+
+    async function handleLogout(){
+        setError('');
+        try{
+            await logout();
+            history.push('/auth')
+        } catch (err){
+            setError('Failed To Logout');
+        }
+    }
 
 export default class SimpleSlider extends Component {
   render() {
@@ -80,17 +100,6 @@ export default class SimpleSlider extends Component {
         </div>
         
         <Cardlist/>
-
-    
-
-
-     
-      
-
-
-
-
-
       </div>
     );
   }

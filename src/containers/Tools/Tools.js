@@ -40,6 +40,7 @@ class Tools extends Component{
                     timestamp={tool.timestamp}
                     thumb={tool.images[0]}
                     description={tool.description}
+                    rating={tool.rating}
                     />
                 </Grid.Column>
             ))
