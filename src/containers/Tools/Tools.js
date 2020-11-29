@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from '../../axios-kbu';
-import { Grid } from "semantic-ui-react";
+import {Container, Grid} from "semantic-ui-react";
 import CardTool from '../../components/CardTool/CardTool';
-
+import Loader from '../../components/Loader/Loader';
 
 class Tools extends Component{
     state = {
@@ -29,11 +29,12 @@ class Tools extends Component{
         const { loading } = this.state;
         let tools = null;
         if(loading){
-            tools = <p>Loading</p>
+            tools = <Loader/>;
         } else{
             tools = this.state.tools.map((tool, index) => (
                 <Grid.Column key={index}>
                     <CardTool
+                    id={tool.id}
                     name={tool.name}
                     timestamp={tool.timestamp}
                     thumb={tool.images[0]}
@@ -45,9 +46,11 @@ class Tools extends Component{
         }
 
         return(
-            <Grid relaxed columns={4}>
-                {tools}
-            </Grid>
+            <Container>
+                <Grid relaxed columns={4}>
+                    {tools}
+                </Grid>
+            </Container>
         )
     }
 }
