@@ -64,29 +64,41 @@ function AddTool(props) {
         return;
       }
     }
+    setImagesError('');
     setImages([...images, ...event.target.files]);
   }
 
   function performValidation() {
+    let flag = false;
     if (name === '') {
       setNameError(true);
+      flag = true;
     }
     if (cost === '') {
       setCostError(true);
+      flag = true;
     }
-    console.log(description)
     if (description === '') {
       console.log('here');
       setDescriptionError(true);
+      flag = true;
     }
     if (quantity === '') {
       setQuantityError(true);
+      flag = true;
     }
+    if(images.length === 0){
+      setImagesError('Please add atleast one image');
+      flag = true;
+    }
+    return flag;
   }
 
   async function onSubmit(event) {
     event.preventDefault();
-    performValidation();
+    if(performValidation()){
+      return;
+    }
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
