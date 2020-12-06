@@ -96,7 +96,7 @@ class ToolDetail extends Component {
                     <Container>
                         <div className={styles.stickHeader}>
                             <h2>Reviews</h2>
-                            <Reviews reviewsUrl={state.reviews}/>
+                            <Reviews {...this.props} reviewsUrl={state.reviews}/>
                         </div>
                     </Container>
                 </>
