@@ -12,7 +12,7 @@ class Tools extends Component{
 
     async componentDidMount() {
         try{
-            const res = await axios.get('/tools');
+            const res = await axios.get('/tools/');
             this.setState(previousState => {
                 return {
                     ...previousState,

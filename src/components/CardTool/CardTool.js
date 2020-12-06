@@ -31,7 +31,7 @@ function cardTool(props) {
                     {description}
                 </Card.Description>
                 <span>
-          <i class="rupee sign icon"></i>
+          <i className="rupee sign icon"></i>
           {props.cost}
         </span>
             </Card.Content>

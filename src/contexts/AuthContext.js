@@ -10,7 +10,6 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState('');
     const [user, setUser] = useState('');
-    const [tokenExpiration, setTokenExpiration] = useState(null);
     const [isAuth, setIsAuth] = useState(false);
 
     async function login(username, password){
@@ -22,13 +21,10 @@ export const AuthProvider = ({ children }) => {
             const res = await axios.post('/auth/login/',{...data});
             console.log(res);
             const { key } = res.data;
-            const tokenExpirationTime = new Date(new Date().getTime() + 1000 * 60 * 60);
             localStorage.setItem('token',key);
             localStorage.setItem('user',username);
-            localStorage.setItem('tokenExpiration', tokenExpirationTime.toISOString());
             setToken(key);
             setUser(username);
-            setTokenExpiration(tokenExpirationTime);
             setIsAuth(true);
         } catch (err) {
             return Promise.reject(err);
@@ -45,28 +41,27 @@ export const AuthProvider = ({ children }) => {
             }
             const res = await axios.post('auth/registration/',{...data});
             const { key } = res.data;
-            const tokenExpirationTime = new Date(new Date().getTime() + 1000 * 60 * 60);
             localStorage.setItem('token',key);
             localStorage.setItem('user',username);
-            localStorage.setItem('tokenExpiration', tokenExpirationTime.toISOString());
             setUser(username);
             setToken(key);
-            setTokenExpiration(tokenExpirationTime);
             setIsAuth(true);
         } catch (err) {
             return Promise.reject(err);
         }
     }
 
-    async function logout(){
+    async function logout(authToken){
         try{
+            const res = await axios.post('/auth/logout/',{}, {
+                Authorization:authToken
+            });
+            console.log(res);
             setUser(null);
             setToken(null);
-            setTokenExpiration(null);
             setIsAuth(false);
             localStorage.removeItem('user');
             localStorage.removeItem('token');
-            localStorage.removeItem('tokenExpiration');
         }
         catch (err){
             return new Promise.reject('some err');
@@ -75,15 +70,13 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         function autoLogin(){
-            const storedExpirationTime = localStorage.getItem('tokenExpiration');
             const storedUser = localStorage.getItem('user');
             const storedToken = localStorage.getItem('token');
             console.log('Inside useEffect hook for auto login');
-            if (storedExpirationTime && storedUser && storedToken && new Date(storedExpirationTime) > new Date()) {
+            if (storedUser && storedToken) {
                 setUser(storedUser);
                 setToken(storedToken);
                 setIsAuth(true);
-                setTokenExpiration(storedExpirationTime);
             }
         }
         return autoLogin();
