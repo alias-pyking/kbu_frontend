@@ -16,7 +16,7 @@ class CardList extends React.Component {
 
     async componentDidMount() {
         try {
-            const res = await axios.get('/tools');
+            const res = await axios.get('tools/');
             this.setState({
                 loading:false,
                 tools:res.data.results,

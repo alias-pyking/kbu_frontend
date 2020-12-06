@@ -22,21 +22,16 @@ function cardTool(props) {
             <Card.Content>
                 <Card.Header>{props.name}</Card.Header>
                 <Card.Meta>
-                    <span className='date'>Added {timeAgo.format(new Date(props.timestamp))}</span>
-                    <Rating icon='star' defaultRating={3.5} maxRating={5} disabled/>
-                    <Card.Header className='theme-color'>{props.name}</Card.Header>
                     <Card.Meta>
                         <span className='date'>Added {getTimeAgo(props.timestamp)}</span>
+                        <Rating icon='star' defaultRating={3.5} maxRating={5} disabled/>
                     </Card.Meta>
-                    <Card.Description>
-                        {description}
-                    </Card.Description>
                 </Card.Meta>
                 <Card.Description>
                     {description}
                 </Card.Description>
                 <span>
-          <i class="rupee sign icon"></i>
+          <i className="rupee sign icon"></i>
           {props.cost}
         </span>
             </Card.Content>
