@@ -14,6 +14,7 @@ function NavBar (){
                 <NavBarItem to='/tools' name='Tools'  />
                 <NavBarItem to='/about' name='About'  />
                 <NavBarItem to='/auth' name='Login/Register' />
+            
             </Menu>
         </Segment>
        
