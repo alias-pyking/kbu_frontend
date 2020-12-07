@@ -6,7 +6,7 @@ import {useAuth} from '../../contexts/AuthContext'
 import SearchTool from "../../containers/SearchTools/SearchTools";
 
 function NavBar(props) {
-  const {isAuth} = useAuth();
+  const {isAuth,user} = useAuth();
   return (
 
     <Segment inverted>
@@ -22,7 +22,12 @@ function NavBar(props) {
         {isAuth ?
           <NavBarItem to='/tools/add' name='Add'/> :
           ''}
-        <SearchTool/>
+          {isAuth ? 
+            <NavBarItem to={`/profile/${user}`} name={`Hey! ${user}` }/>  :
+          ''
+          }
+          <Menu.Menu position='right'>
+        <SearchTool/></Menu.Menu>
       </Menu>
     </Segment>
 

@@ -45,7 +45,7 @@ export default function SearchTool(props) {
     });
   }
   return (
-    <div className={classes.searchBar}>
+    <div  className={classes.searchBar}>
     <Input
       loading={loading}
       onChange={onSearchInputChange}

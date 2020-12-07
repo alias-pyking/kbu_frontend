@@ -25,6 +25,7 @@ class ToolDetail extends Component {
 
     async componentDidMount() {
         const { toolId } = this.props.match.params;
+       
         const path = `tools/${toolId}`;
         try{
             const res = await axios.get(path);
@@ -70,7 +71,7 @@ class ToolDetail extends Component {
                     </Container>
                     <Container>
                         <div>
-                        <h3>By <Link to={`/acc/${state.user}`}> {state.user}</Link></h3>
+                        <h3>By <Link to={`/profile/${state.user}`}> {state.user}</Link></h3>
                         <h2>Item Description</h2>
                         <p>{state.description}</p>
                         </div>
@@ -85,7 +86,7 @@ class ToolDetail extends Component {
                             </LabelGroup>
                             <LabelGroup tag className={styles.toolMeta}>
                                 <Label as='a' color={"yellow"}>
-                                    Cost ${state.cost}
+                                    Cost <i className="rupee sign icon"></i>{state.cost}
                                 </Label>
                             </LabelGroup>
                             <Button fluid size={'huge'} color={'teal'} as={Link} to={`/tools/${state.id}/rent`}>Rent</Button>

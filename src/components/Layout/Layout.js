@@ -3,7 +3,6 @@ import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer';
 import {Container} from "semantic-ui-react";
 
-
 const layout = (props) => (
     
     <Container fluid>
@@ -12,6 +11,7 @@ const layout = (props) => (
         { props.children }
         </div>
         <Footer/>
+
     </Container>
 );
 
