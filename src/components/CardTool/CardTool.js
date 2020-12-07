@@ -32,7 +32,7 @@ function cardTool(props) {
                 </Card.Description>
                 <span>
           <i className="rupee sign icon"></i>
-          {props.cost}
+          {props.cost} per day
         </span>
             </Card.Content>
         </Card>

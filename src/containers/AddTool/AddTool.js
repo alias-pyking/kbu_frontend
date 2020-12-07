@@ -9,7 +9,7 @@ function AddTool(props) {
   const {token} = useAuth();
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState(false);
-  const [cost, setCost] = useState('');
+  const [costPerDay, setCostPerDay] = useState('');
   const [costError, setCostError] = useState(false);
   const [images, setImages] = useState([]);
   const [imagesError, setImagesError] = useState('');
@@ -28,8 +28,8 @@ function AddTool(props) {
   }
 
   function onCostChange(event) {
-    setCost(event.target.value);
-    if (cost !== '') {
+    setCostPerDay(event.target.value);
+    if (costPerDay !== '') {
       setCostError(false);
     }
   }
@@ -74,7 +74,7 @@ function AddTool(props) {
       setNameError(true);
       flag = true;
     }
-    if (cost === '') {
+    if (costPerDay === '') {
       setCostError(true);
       flag = true;
     }
@@ -102,7 +102,7 @@ function AddTool(props) {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
-    formData.append('cost', cost);
+    formData.append('cost_per_day', costPerDay);
     formData.append('quantity', quantity);
     formData.append('status', status);
 
@@ -162,7 +162,7 @@ function AddTool(props) {
               error={costError}
               size={'huge'}
               fluid
-              placeholder={'Price'}
+              placeholder={'Price per day in INR'}
               type={'number'}
               onChange={onCostChange}
             />

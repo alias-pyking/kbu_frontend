@@ -1,17 +1,17 @@
 import React, {useState} from "react";
-import {Card, Icon, Input, List} from "semantic-ui-react";
+import {Grid, Header, Search, Segment, List, Input, Icon} from "semantic-ui-react";
 import axios from "../../axios-kbu";
+import {Link, useHistory} from "react-router-dom";
 import classes from './SearchTools.module.css';
-import {Link} from "react-router-dom";
+
 
 export default function SearchTool(props) {
-
+  const history = useHistory();
   const [searchText, setSearchText] = useState();
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [results, setResults] = useState([]);
   const [error, setError] = useState('');
-
 
   async function onSearchInputChange(event) {
     setSearchText(event.target.value);
@@ -32,29 +32,42 @@ export default function SearchTool(props) {
       setLoaded(false);
     }
   }
+
   let displayResults = '';
-  if(loaded){
+  if (loaded) {
     displayResults = results.map((item, index) => {
-      return (
-        <List.Item>
-          <List.Content>
-            <List.Header as={Link} to={`/tools/${item.id}`}>{item.name}</List.Header>
-          </List.Content>
-        </List.Item>
-      )
+      let description = item.description;
+      description = description.toString();
+      let len = description.length;
+      const sliceIndex = description.length < 100 ? description.length : 100;
+      description = description.slice(0, sliceIndex);
+      if (sliceIndex < len) {
+          description = description + '...';
+      }
+      return {
+        id: item.id,
+        name: item.name,
+        title: <a href={'/tools/' + item.id}>{item.name}</a>,
+        description: <a href={'/tools/' + item.id}> {description} </a>,
+      }
     });
   }
+
+  function handleResultSelect(event, {result}) {
+    setSearchText(result.name);
+  }
+
   return (
-    <div  className={classes.searchBar}>
-    <Input
-      loading={loading}
-      onChange={onSearchInputChange}
-      icon={<Icon name='search' inverted circular link/>}
-      placeholder='Search...'
-    />
-    <Card className={classes.searchResults}>
-      {loaded? displayResults:''}
-    </Card>
+    <div className={classes.searchBar}>
+      <Search
+        loading={loading}
+        onSearchChange={onSearchInputChange}
+        onResultSelect={handleResultSelect}
+        value={searchText}
+        icon={<Icon name='search' inverted circular link/>}
+        placeholder='Search...'
+        results={displayResults}
+      />
     </div>
   )
 }
