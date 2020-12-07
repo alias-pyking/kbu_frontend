@@ -72,6 +72,9 @@ function Reviews(props) {
       console.log(res);
       setReviews([...reviews, res.data])
       setPostingReview(false);
+      setTitle('');
+      setStars(1);
+      setText('');
     } catch (err) {
       setError('Something went wrong unable to post review');
       setPostingReview(false);
@@ -141,7 +144,7 @@ function Reviews(props) {
               size={'massive'}
               defaultRating={1}
               maxRating={5}
-              rating={stars}
+              rating={stars}toh
               onRate={onStarsChange}
             />
             <Form.TextArea
