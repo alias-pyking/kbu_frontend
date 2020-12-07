@@ -14,6 +14,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Logout from "./containers/Auth/Logout";
 import AddTool from "./containers/AddTool/AddTool";
+import Transaction from "./containers/Transaction/Transaction";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route exact path='/tools/add' component={AddTool} />
             <Route exact path='/tools/:toolId' component={ToolDetail}/>
             <Route exact path='/tools/:toolId/reviews' component={Reviews}/>
+            <PrivateRoute exact path='/tools/:toolId/rent' component={Transaction}/>
 
             <Route exact path='/about' component={About}/>
             {/* Auth routes */}

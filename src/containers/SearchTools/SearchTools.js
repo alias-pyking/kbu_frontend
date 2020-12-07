@@ -1,17 +1,14 @@
 import React, {useState} from "react";
-import {Grid, Header, Search, Segment, List, Input, Icon} from "semantic-ui-react";
+import { Search, Icon} from "semantic-ui-react";
 import axios from "../../axios-kbu";
-import {Link, useHistory} from "react-router-dom";
 import classes from './SearchTools.module.css';
 
 
-export default function SearchTool(props) {
-  const history = useHistory();
+export default function SearchTool() {
   const [searchText, setSearchText] = useState();
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [results, setResults] = useState([]);
-  const [error, setError] = useState('');
 
   async function onSearchInputChange(event) {
     setSearchText(event.target.value);
@@ -27,7 +24,6 @@ export default function SearchTool(props) {
       setResults(res.data.results);
       setLoaded(true);
     } catch (err) {
-      setError('Something went wrong');
       setLoading(false);
       setLoaded(false);
     }
