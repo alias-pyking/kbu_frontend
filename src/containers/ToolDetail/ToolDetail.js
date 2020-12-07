@@ -16,7 +16,7 @@ class ToolDetail extends Component {
         images: null,
         description:'',
         quantity:null,
-        cost: null,
+        cost_per_day: null,
         status:'',
         reviews:'',
         timestamp:null,
@@ -39,7 +39,7 @@ class ToolDetail extends Component {
                     images:data.images,
                     description:data.description,
                     quantity: data.quantity,
-                    cost: data.cost,
+                    cost_per_day: data.cost_per_day,
                     status: data.status,
                     timestamp:data.timestamp,
                     reviews:data.reviews,
@@ -85,7 +85,7 @@ class ToolDetail extends Component {
                             </LabelGroup>
                             <LabelGroup tag className={styles.toolMeta}>
                                 <Label as='a' color={"yellow"}>
-                                    Cost ${state.cost}
+                                    Cost per day ${state.cost_per_day}
                                 </Label>
                             </LabelGroup>
                             <Button fluid size={'huge'} color={'teal'} as={Link} to={`/tools/${state.id}/rent`}>Rent</Button>

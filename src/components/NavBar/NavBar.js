@@ -5,7 +5,7 @@ import logo from '../../assets/logo1.png'
 import {useAuth} from '../../contexts/AuthContext'
 import SearchTool from "../../containers/SearchTools/SearchTools";
 
-function NavBar(props) {
+function NavBar() {
   const {isAuth} = useAuth();
   return (
 

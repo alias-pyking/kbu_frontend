@@ -35,7 +35,7 @@ class Tools extends Component{
                 <Grid.Column key={index}>
                     <CardTool
                     id={tool.id}
-                    cost={tool.cost}
+                    cost={tool.cost_per_day}
                     name={tool.name}
                     timestamp={tool.timestamp}
                     thumb={tool.images[0]}

@@ -142,9 +142,8 @@ function Reviews(props) {
             <Rating
               icon={'star'}
               size={'massive'}
-              defaultRating={1}
               maxRating={5}
-              rating={stars}toh
+              rating={stars}
               onRate={onStarsChange}
             />
             <Form.TextArea
