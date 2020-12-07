@@ -42,6 +42,7 @@ class Tools extends Component{
                     description={tool.description}
                     rating={tool.rating}
                     />
+
                 </Grid.Column>
             ))
         }

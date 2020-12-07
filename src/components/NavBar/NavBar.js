@@ -5,8 +5,8 @@ import logo from '../../assets/logo1.png'
 import {useAuth} from '../../contexts/AuthContext'
 import SearchTool from "../../containers/SearchTools/SearchTools";
 
-function NavBar() {
-  const {isAuth} = useAuth();
+function NavBar(props) {
+  const {isAuth,user} = useAuth();
   return (
 
     <Segment inverted>
@@ -22,7 +22,12 @@ function NavBar() {
         {isAuth ?
           <NavBarItem to='/tools/add' name='Add'/> :
           ''}
-        <SearchTool/>
+          {isAuth ? 
+            <NavBarItem to={`/profile/${user}`} name={`Hey! ${user}` }/>  :
+          ''
+          }
+          <Menu.Menu position='right'>
+        <SearchTool/></Menu.Menu>
       </Menu>
     </Segment>
 

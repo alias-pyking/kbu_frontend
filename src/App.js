@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import About from './components/About/About';
 
 import ToolDetail from "./containers/ToolDetail/ToolDetail";
+import Profile from './containers/Profile/Profile';
 import Reviews from "./containers/Reviews/Reviews";
 import Auth from "./containers/Auth/Auth";
 import { AuthProvider } from './contexts/AuthContext';
@@ -29,6 +30,7 @@ function App() {
             <Route exact path='/tools/:toolId/reviews' component={Reviews}/>
             <PrivateRoute exact path='/tools/:toolId/rent' component={Transaction}/>
 
+            <PrivateRoute exact path='/profile/:userN' component={Profile}/>
             <Route exact path='/about' component={About}/>
             {/* Auth routes */}
             <Route exact path='/auth' component={Auth}/>
