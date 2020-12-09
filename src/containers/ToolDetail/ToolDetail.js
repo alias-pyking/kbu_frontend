@@ -70,7 +70,7 @@ class ToolDetail extends Component {
           </Container>
           <Container>
             <div>
-              <h3>By <Link to={`/acc/${state.user}`}> {state.user}</Link></h3>
+              <h3>By <Link to={`/profile/${state.user}`}> {state.user}</Link></h3>
               <h2>Item Description</h2>
               <p>{state.description}</p>
             </div>

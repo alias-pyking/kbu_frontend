@@ -10,16 +10,26 @@ class CardList extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            tools: []
+            tools: [],
+            tools1:[]
         }
     }
 
     async componentDidMount() {
         try {
-            const res = await axios.get('tools/');
+            const res = await axios.get('tools/top-rated/');
             this.setState({
                 loading:false,
                 tools:res.data.results,
+            })
+        } catch (err){
+            console.log(err);
+        }
+        try {
+            const res1 = await axios.get('tools/latest/');
+            this.setState({
+                loading:false,
+                tools1:res1.data.results,
             })
         } catch (err){
             console.log(err);
@@ -29,6 +39,7 @@ class CardList extends React.Component {
     render() {
         const loading = this.state.loading;
         let tools = null;
+        let tools1 = null;
         if (loading) {
             tools = <Loader/>;
         } else {
@@ -44,13 +55,32 @@ class CardList extends React.Component {
                     />
                 </Grid.Column>
             ))
+            tools1 = this.state.tools1.map((tool, index) => (
+                <Grid.Column key={index}>
+                    <CardTool
+                        id={tool.id}
+                        cost={tool.cost_per_hour}
+                        name={tool.name}
+                        timestamp={tool.timestamp}
+                        thumb={tool.images[0]}
+                        description={tool.description}
+                    />
+                </Grid.Column>
+                
+            ))
         }
 
         return (
             <Container>
-                <Grid relaxed columns={3}>
+                <h3>Top Rated Products :</h3>
+                <Grid relaxed columns={4}>
                     {tools}
                 </Grid>
+                <h3> Recently Added :</h3>
+                <Grid relaxed columns={4}>
+                {tools1}
+                </Grid>
+                
             </Container>
         )
 

@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
 
-h1,p,h4,li{
+h1,p,h4,li,h2,h3{
     
  
     font-family: 'Josefin Sans', sans-serif;
     
+}
+
+#wallet i,h2{
+    display:inline;
+    padding: 10px;
 }

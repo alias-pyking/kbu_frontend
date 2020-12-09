@@ -48,7 +48,6 @@ export default function Home() {
   };
   return (
     <div className='box'>
-
       <img style={{width: '100%'}} src={banner2}/>
       <Slider {...settings}>
         <div>
