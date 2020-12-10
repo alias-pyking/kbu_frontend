@@ -16,6 +16,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Logout from "./containers/Auth/Logout";
 import AddTool from "./containers/AddTool/AddTool";
 import Transaction from "./containers/Transaction/Transaction";
+import EditProfile from "./containers/Profile/EditProfile/EditProfile";
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
             <Route exact path='/tools/:toolId/reviews' component={Reviews}/>
             <PrivateRoute exact path='/tools/:toolId/rent' component={Transaction}/>
 
-            <PrivateRoute exact path='/profile/:userN' component={Profile}/>
+            <PrivateRoute exact path='/profile/:userName' component={Profile}/>
+            <PrivateRoute exact path='/profile/:userName/edit' component={EditProfile}/>
             <Route exact path='/about' component={About}/>
             {/* Auth routes */}
             <Route exact path='/auth' component={Auth}/>

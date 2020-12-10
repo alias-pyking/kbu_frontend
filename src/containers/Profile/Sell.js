@@ -1,61 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import {Container, Grid} from "semantic-ui-react";
+import React, {useEffect, useState} from 'react';
+import {Container, Grid, Segment} from "semantic-ui-react";
 import axios from '../../axios-kbu';
 import Loader from '../../components/Loader/Loader';
 import Card from './Card';
 
 
-function Sell(props){
-    const [tools, setTools] = useState([]);
-    const [loading, setLoading] = useState(true);
+function Sell(props) {
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const userName = props.userName;
+  console.log(userName);
+  useEffect(() => {
+    const configs = {
+      headers: {'Authorization': `Token ${props.token}`}
+    };
+    let path = `/profile/${userName}/transactions/`;
+    if (props.buy) path += '?tr=b';
 
-    const path = `profile/${props.userN}/transactions/`;
-    useEffect(() =>{
-        (async function fetchProfile() {
-            let res = await axios.get(path, {headers: {'Authorization': `Token ${props.token}`}});
-            const {data} = res;
-            // console.log(data);
-            setTools(data.results);
-            setLoading(false);
-          })();
-    }, []);
-     
-    let toolsSell = null;
-    if(loading){
-        toolsSell = <Loader/>;
-    } else{
+    (async function fetchTransactions() {
+      let res = await axios.get(path, configs);
+      const {data} = res;
+      // console.log(data);
+      setTransactions(data.results);
+      setLoading(false);
+    })();
+  }, []);
 
-        toolsSell = tools.map((tool, index) => (
-            <Grid.Column key={index}>
-                <Card
-                    id={tool.id}
-                    toolId={tool.tool}
-                    costPerHour={tool.cost_per_hour}
-                    cost={tool.cost}
-                    paymentStatus={tool.payment_status}
-                    sellingTime={tool.selling_time}
-                    completionTime={tool.expiration_time}
-                    status={tool.status}
-                    buyer={tool.buyer}
-                    seller={tool.seller}
-                    name={tool.tool.name}
-                    description={tool.tool.description}
-                    image={tool.tool.images[0]}
-                />
-            </Grid.Column>
-        ))
-    }
-    return (
-        <Container>
-        <div className="ui segment raised" style={{borderColor:'teal',borderRadius:'5px'}}>
-            <h3>Product you gave on rent :</h3></div>
-            <div className="ui segment raised" style={{borderColor:'teal',borderRadius:'5px'}}>
-            <Grid relaxed columns={1}>
-                {toolsSell}
-            </Grid>
-            </div>
-        </Container>
-    )
+  let displayTransactions = null;
+
+  if (loading) {
+    displayTransactions = <Loader/>;
+  } else {
+
+    displayTransactions = transactions.map((transaction, index) => (
+      <Grid.Column key={index}>
+        <Card
+          id={transaction.id}
+          toolId={transaction.tool}
+          costPerHour={transaction.cost_per_hour}
+          cost={transaction.cost}
+          paymentStatus={transaction.payment_status}
+          sellingTime={transaction.selling_time}
+          completionTime={transaction.expiration_time}
+          status={transaction.status}
+          buyer={transaction.buyer}
+          seller={transaction.seller}
+          name={transaction.tool.name}
+          description={transaction.tool.description}
+          image={transaction.tool.images[0]}
+        />
+      </Grid.Column>
+    ))
+  }
+  return (
+      <Segment raised style={{borderColor: 'teal', borderRadius: '5px'}}>
+        <Grid relaxed columns={1}>
+          {displayTransactions}
+        </Grid>
+      </Segment>
+  )
 
 }
 
