@@ -47,9 +47,9 @@ function Buy(props){
     }
     return (
         <Container>
-        <div className="ui segment " style={{borderColor:'teal',borderRadius:'20px'}}>
+        <div className="ui segment raised" style={{borderColor:'teal',borderRadius:'5px'}}>
             <h3>Product you took on rent :</h3></div>
-            <div className="ui segment " style={{borderColor:'teal',borderRadius:'20px'}}>
+            <div className="ui segment raised" style={{borderColor:'teal',borderRadius:'5px'}}>
             <Grid relaxed columns={1}>
                 {toolsBuy}
             </Grid>

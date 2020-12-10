@@ -6,6 +6,7 @@ import Sell from './Sell';
 import Buy from './Buy';
 import {Button, Form, Grid, Header, Segment} from 'semantic-ui-react';
 import Error from "../../components/Error/Error";
+import { getTimeAgo } from '../../utilities/util';
 
 import './Profile.css';
 
@@ -20,7 +21,7 @@ function Profile(props) {
   const [profilePic, setProfilePic] = useState('');
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
-  const [wallet,setWallet] = useState('');
+  const [wallet, setWallet] = useState('');
   const [editFlag, setEditFlag] = useState(false);
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
@@ -31,6 +32,7 @@ function Profile(props) {
 
 
   const {token, user} = useAuth();
+
   // console.log(user, token);
 
   function onEditFlagChange() {
@@ -154,7 +156,7 @@ function Profile(props) {
 
   }, []);
 
-  let doj = dateJoined.substr(0,10);
+  let doj = dateJoined.substr(0, 10);
 
   if (loading) {
     return (
@@ -164,13 +166,13 @@ function Profile(props) {
   } else { //when user will see his/her own profile , edit icon will be shown ,when they will click on the icon then they can edit there info
     if (userName === user && editFlag === false) {
       return (<div style={{width: "60%", marginLeft: "20%"}}>
-      <div id='walletMain' className="ui segment " style={{borderColor:'teal',borderRadius:'20px'}}>
-      <h2>WALLET :</h2>
-      <div id='wallet'style={{float:'right'}}>
-             <i class="large rupee sign icon"><h2 >{ wallet}</h2></i> 
-            </div>
-      </div>
-        <div className="ui segment " style={{borderColor:'teal',borderRadius:'20px'}}>
+        <div id='walletMain' className="ui segment raised" style={{borderColor: 'teal', borderRadius: '5px'}}>
+          <h2>WALLET :</h2>
+          <div id='wallet' style={{float: 'right'}}>
+            <i class="large rupee sign icon"><h2>{wallet}</h2></i>
+          </div>
+        </div>
+        <div className="ui segment raised" style={{borderColor: 'teal', borderRadius: '5px'}}>
           <div className="ui two column grid">
             <div className="column">
               <i className="edit icon" onClick={onEditFlagChange}> </i>Edit Profile
@@ -180,31 +182,31 @@ function Profile(props) {
 
             <div className="column">
               <h1>ABOUT :</h1>
-              <div className="ui segment " style={{borderColor:'teal',borderRadius:'20px'}}>
+              <div className="ui segment raised" style={{borderColor: 'teal', borderRadius: '5px'}}>
                 <h1>Name : {' ' + firstName + ' ' + lastName} </h1>
                 <p>User Name :{' ' + userName}</p>
                 <p>Email : {' ' + email}</p>
                 <p>Joined On : {' ' + doj}</p>
               </div>
-              <div className="ui segment " style={{borderColor:'teal',borderRadius:'20px'}}>
-          <h2>BIO : </h2>
-          <p>{bio}</p>
-        </div>
+              <div className="ui segment raised" style={{borderColor: 'teal', borderRadius: '5px'}}>
+                <h2>BIO : </h2>
+                <p>{bio}</p>
+              </div>
 
             </div>
 
           </div>
           <div className="ui vertical divider"/>
-          
+
         </div>
         <div className="ui two column grid">
-        <div className="column">
-          <Sell token={token} userN={userName}/>
+          <div className="column">
+            <Sell token={token} userN={userName}/>
           </div>
           <div className="column">
-          <Buy token={token} userN={userName}/>
+            <Buy token={token} userN={userName}/>
           </div>
-          </div>
+        </div>
       </div>)
     }
 
@@ -264,7 +266,7 @@ function Profile(props) {
 //when a user will see other user profile
     else {
       return (<div style={{width: "60%", marginLeft: "20%"}}>
-        <div className="ui segment " style={{borderColor:'teal',borderRadius:'20px'}}>
+        <div className="ui segment raised" style={{borderColor: 'teal', borderRadius: '5px'}}>
           <div className="ui two column grid">
             <div className="column">
               <img alt={'profile-pic'} className="ui medium circular image" src={profilePic}/>
@@ -273,21 +275,21 @@ function Profile(props) {
 
             <div className="column">
               <h1>ABOUT :</h1>
-              <div className="ui segment " style={{borderColor:'teal',borderRadius:'20px'}}>
+              <div className="ui segment raised" style={{borderColor: 'teal', borderRadius: '5px'}}>
                 <h1>Name : {' ' + firstName + ' ' + lastName} </h1>
                 <p>User Name :{' ' + userName}</p>
                 <p>Email : {' ' + email}</p>
-                <p>Date Joined : {' ' + dateJoined}</p>
+                <p>Date Joined : {' ' + getTimeAgo(dateJoined)}</p>
               </div>
-              <div class="ui segment " style={{borderColor:'teal',borderRadius:'20px'}}>
-          <h2>BIO : <br/> {bio}</h2>
-        </div>
+              <div className="ui segment raised" style={{borderColor: 'teal', borderRadius: '5px'}}>
+                <h2>BIO : <br/> {bio}</h2>
+              </div>
             </div>
 
           </div>
           <div class="ui vertical divider"/>
         </div>
-        
+
       </div>)
     }
 

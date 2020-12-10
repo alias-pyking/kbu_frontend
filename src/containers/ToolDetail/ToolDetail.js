@@ -87,7 +87,7 @@ class ToolDetail extends Component {
               </LabelGroup>
               <LabelGroup tag className={styles.toolMeta}>
                 <Label as='a' color={"yellow"}>
-                  Cost per day <i class='rupee sign icon'/>{state.cost_per_hour}
+                  Cost per day <i className='rupee sign icon'/>{state.cost_per_hour}
                 </Label>
               </LabelGroup>
               <Button fluid size={'huge'} color={'teal'} as={Link} to={`/tools/${state.id}/rent`} disabled={!this.state.quantity}>Rent</Button>
