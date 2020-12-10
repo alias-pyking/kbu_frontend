@@ -287,7 +287,7 @@ function Profile(props) {
             </div>
 
           </div>
-          <div class="ui vertical divider"/>
+          <div className="ui vertical divider"/>
         </div>
 
       </div>)

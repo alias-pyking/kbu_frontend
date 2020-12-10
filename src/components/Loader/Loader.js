@@ -1,12 +1,15 @@
-import Loader from "react-loader-spinner";
 import React from "react";
 import styles from './Loader.module.css';
+import {Dimmer, Image, Segment, Loader} from "semantic-ui-react";
 
-function loader(){
-    return (
-        <div className={styles.centered}>
-            <Loader type='Bars' color='#00b5ad' height={200} width={200}/>
-        </div>
-    )
+function loader() {
+  return (
+    <Segment>
+      <Loader active/>
+
+      <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png'/>
+    </Segment>
+  )
 }
+
 export default loader;
