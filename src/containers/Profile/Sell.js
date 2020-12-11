@@ -36,7 +36,7 @@ function Sell(props) {
       <Grid.Column key={index}>
         <Card
           id={transaction.id}
-          toolId={transaction.tool}
+          toolId={transaction.tool.id}
           costPerHour={transaction.cost_per_hour}
           cost={transaction.cost}
           paymentStatus={transaction.payment_status}
