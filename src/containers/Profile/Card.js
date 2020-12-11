@@ -46,7 +46,7 @@ function Card(props) {
           </div>
           <div className="content">
               <LabelGroup tag className={styles.toolMeta}>
-                <Label color={'yellow'}>
+                <Label color={'yellow'} >
                   <Icon name={'rupee sign'}/>{costPerHour} /hr
                 </Label>
                 <Label color={'yellow'}>
