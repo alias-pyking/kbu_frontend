@@ -9,7 +9,6 @@ function Sell(props) {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const userName = props.userName;
-  console.log(userName);
   useEffect(() => {
     const configs = {
       headers: {'Authorization': `Token ${props.token}`}
@@ -36,7 +35,7 @@ function Sell(props) {
       <Grid.Column key={index}>
         <Card
           id={transaction.id}
-          toolId={transaction.tool.id}
+          toolId={transaction.tool ? transaction.tool.id:''}
           costPerHour={transaction.cost_per_hour}
           cost={transaction.cost}
           paymentStatus={transaction.payment_status}

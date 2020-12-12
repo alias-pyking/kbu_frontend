@@ -19,6 +19,10 @@ class ToolDetail extends Component {
     cost_per_hour: null,
     status: '',
     reviews: '',
+    rating: 0,
+    state: '',
+    city: '',
+    town: '',
     timestamp: null,
     loading: true,
   }
@@ -43,6 +47,10 @@ class ToolDetail extends Component {
           status: data.status,
           timestamp: data.timestamp,
           reviews: data.reviews,
+          rating: data.rating,
+          state: data.state,
+          city: data.city,
+          town: data.town,
           loading: false,
         }
       });
@@ -50,8 +58,7 @@ class ToolDetail extends Component {
       console.log(err);
     }
   }
-  
-  
+
 
   render() {
     let tool = null;
@@ -73,8 +80,21 @@ class ToolDetail extends Component {
           <Container>
             <div>
               <h3>By <Link to={`/profile/${state.user}`}> {state.user}</Link></h3>
+
+              <div>
+                <h3>Rating: {state.rating}</h3>
+                <input
+                  type='range'
+                  min={0}
+                  max={5}
+                  value={state.rating}
+                />
+                <br/>
+              </div>
+              <br/>
               <h2>Item Description</h2>
               <p>{state.description}</p>
+              <h5> Currently available in {state.state}, {state.city}, {state.town}</h5>
             </div>
             <div>
               <LabelGroup tag className={styles.toolMeta}>
@@ -90,7 +110,8 @@ class ToolDetail extends Component {
                   Cost per day <i className='rupee sign icon'/>{state.cost_per_hour}
                 </Label>
               </LabelGroup>
-              <Button fluid size={'huge'} color={'teal'} as={Link} to={`/tools/${state.id}/rent`} disabled={!this.state.quantity}>Rent</Button>
+              <Button fluid size={'huge'} color={'teal'} as={Link} to={`/tools/${state.id}/rent`}
+                      disabled={!this.state.quantity}>Rent</Button>
             </div>
           </Container>
           <br></br>

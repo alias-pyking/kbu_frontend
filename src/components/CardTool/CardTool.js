@@ -16,7 +16,6 @@ function cardTool(props) {
   if (sliceIndex < len) {
     description = description + '...';
   }
-  console.log(props.rating);
   return (
     <Card as={Link} to={`/tools/${props.id}`}>
       <Image src={props.thumb} wrapped ui={false}/>
