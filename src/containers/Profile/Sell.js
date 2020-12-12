@@ -45,9 +45,9 @@ function Sell(props) {
           status={transaction.status}
           buyer={transaction.buyer}
           seller={transaction.seller}
-          name={transaction.tool.name}
-          description={transaction.tool.description}
-          image={transaction.tool.images[0]}
+          name={transaction.tool ? transaction.tool.name:''}
+          description={transaction.tool?  transaction.tool.description:''}
+          image={transaction.tool ? transaction.tool.images[0]:''}
         />
       </Grid.Column>
     ))

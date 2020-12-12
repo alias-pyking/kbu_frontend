@@ -39,6 +39,9 @@ class Tools extends Component{
                     name={tool.name}
                     timestamp={tool.timestamp}
                     thumb={tool.images[0]}
+                    state={tool.state}
+                    city={tool.city}
+                    town={tool.town}
                     description={tool.description}
                     rating={tool.rating}
                     />

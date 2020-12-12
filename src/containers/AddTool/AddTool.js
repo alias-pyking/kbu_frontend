@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Input, Form, Grid, Header, Segment, Select} from 'semantic-ui-react';
+import {Button, Input, Form, Grid, Header, Segment, Select, Label} from 'semantic-ui-react';
 import {useAuth} from "../../contexts/AuthContext";
 import Error from "../../components/Error/Error";
 import axios from '../../axios-kbu';
@@ -19,6 +19,12 @@ function AddTool(props) {
   const [quantityError, setQuantityError] = useState(false);
   const [status, setStatus] = useState('available');
   const [submitting, setSubmitting] = useState(false);
+  const [state, setState] = useState('');
+  const [stateError, setStateError] = useState(false);
+  const [city, setCity] = useState('');
+  const [cityError, setCityError] = useState(false);
+  const [town, setTown] = useState('');
+  const [townError, setTownError] = useState(false);
 
   function onNameChange(event) {
     setName(event.target.value);
@@ -49,12 +55,32 @@ function AddTool(props) {
     }
   }
 
+  function onStateChange(event) {
+    setState(event.target.value);
+    if (state !== '') {
+      setStateError(false)
+    }
+  }
+
+  function onCityChange(event) {
+    setCity(event.target.value);
+    if (city !== '') {
+      setCityError(false)
+    }
+  }
+  function onTownChange(event) {
+    setTown(event.target.value);
+    if (quantity !== '') {
+      setTownError(false);
+    }
+  }
+
+
   function onStatusChange(event) {
     setStatus(event.target.value);
   }
 
   function onImagesChange(event) {
-    console.log(event.target.files[0]);
     const files = event.target.files;
     const allowedTypes = ['image/jpeg','image/gif','image/png','image/jpg','image/x-png'];
 
@@ -91,6 +117,17 @@ function AddTool(props) {
       setImagesError('Please add atleast one image');
       flag = true;
     }
+    if (state === ''){
+      setStateError(true);
+      flag = true;
+    }
+    if(city === ''){
+      setCityError(true);
+      flag = true;
+    }
+    if(town === ''){
+      setTownError(true);
+    }
     return flag;
   }
 
@@ -102,9 +139,12 @@ function AddTool(props) {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
-    formData.append('cost_per_day', costPerDay);
+    formData.append('cost_per_hour', costPerDay);
     formData.append('quantity', quantity);
     formData.append('status', status);
+    formData.append('state', state);
+    formData.append('city', city);
+    formData.append('town', town);
 
     for(let i = 0; i < images.length; i++){
       formData.append('images', images[i]);
@@ -167,6 +207,7 @@ function AddTool(props) {
               onChange={onCostChange}
             />
             <Form.Field>
+              <Label>Status</Label>
               <select onChange={onStatusChange}>
                 <option value='available'> Available</option>
                 <option value='not_available'>Not available</option>
@@ -174,12 +215,38 @@ function AddTool(props) {
             </Form.Field>
             {imagesError ? <Error error={imagesError}/>:''}
             <Form.Input
+              label={'Tool Images'}
               size={'huge'}
               fluid
               type={'file'}
               required={true}
               multiple
               onChange={onImagesChange}
+            />
+            <Label>Address</Label>
+            <Form.Input
+              error={stateError}
+              size={'huge'}
+              fluid
+              placeholder={'State'}
+              type={'text'}
+              onChange={onStateChange}
+            />
+            <Form.Input
+              error={cityError}
+              size={'huge'}
+              fluid
+              placeholder={'City'}
+              type={'text'}
+              onChange={onCityChange}
+            />
+            <Form.Input
+              error={townError}
+              size={'huge'}
+              fluid
+              placeholder={'Locality/town/village'}
+              type={'text'}
+              onChange={onTownChange}
             />
             <Button loading={submitting} disabled={submitting} color={'teal'} size={'huge'} type={'submit'} onClick={onSubmit}> Submit</Button>
           </Segment>

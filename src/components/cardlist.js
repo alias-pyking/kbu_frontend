@@ -52,6 +52,9 @@ class CardList extends React.Component {
                         timestamp={tool.timestamp}
                         thumb={tool.images[0]}
                         rating={tool.rating}
+                        state={tool.state}
+                        city={tool.city}
+                        town={tool.town}
                         description={tool.description}
                     />
                 </Grid.Column>
@@ -66,6 +69,9 @@ class CardList extends React.Component {
                         timestamp={tool.timestamp}
                         thumb={tool.images[0]}
                         description={tool.description}
+                        state={tool.state}
+                        city={tool.city}
+                        town={tool.town}
                     />
                 </Grid.Column>
                 
