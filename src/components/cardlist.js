@@ -30,7 +30,7 @@ class CardList extends React.Component {
             this.setState({
                 loading:false,
                 tools1:res1.data.results,
-            })
+            });
         } catch (err){
             console.log(err);
         }
@@ -51,6 +51,7 @@ class CardList extends React.Component {
                         name={tool.name}
                         timestamp={tool.timestamp}
                         thumb={tool.images[0]}
+                        rating={tool.rating}
                         description={tool.description}
                     />
                 </Grid.Column>
@@ -61,6 +62,7 @@ class CardList extends React.Component {
                         id={tool.id}
                         cost={tool.cost_per_hour}
                         name={tool.name}
+                        rating={tool.rating}
                         timestamp={tool.timestamp}
                         thumb={tool.images[0]}
                         description={tool.description}

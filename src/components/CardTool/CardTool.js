@@ -1,6 +1,6 @@
 import React from 'react';
-import {Card, Image, Rating} from "semantic-ui-react";
-import {getTimeAgo, timeAgo} from '../../utilities/util';
+import {Card, Icon, Image, Rating} from "semantic-ui-react";
+import {getTimeAgo} from '../../utilities/util';
 import {Link} from "react-router-dom";
 
 
@@ -16,6 +16,7 @@ function cardTool(props) {
     if (sliceIndex < len) {
         description = description + '...';
     }
+    console.log(props.rating);
     return (
         <Card as={Link} to={`/tools/${props.id}`}>
             <Image src={props.thumb} wrapped ui={false}/>
@@ -24,14 +25,14 @@ function cardTool(props) {
                 <Card.Meta>
                     <Card.Meta>
                         <span className='date'>Added {getTimeAgo(props.timestamp)}</span>
-                        <Rating icon='star' defaultRating={3.5} maxRating={5} disabled/>
+                        <Rating icon='star' rating={props.rating} maxRating={5} disabled/>
                     </Card.Meta>
                 </Card.Meta>
                 <Card.Description>
                     {description}
                 </Card.Description>
                 <span>
-          <i className="rupee sign icon"></i>
+          <Icon className="rupee sign icon"/>
           {props.cost} per hour
         </span>
             </Card.Content>
