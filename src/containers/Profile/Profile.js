@@ -59,18 +59,20 @@ function Profile(props) {
 
   let doj = dateJoined.substr(0, 10);
 
+
+
   if (loading){
     return <Loader/>;
   }
 
   return (
     <Grid.Column style={{width: "60%", marginLeft: "20%"}}>
-      <Segment raised id='walletMain' style={{borderColor: 'teal', borderRadius: '5px'}}>
+      {user === userName? <Segment raised id='walletMain' style={{borderColor: 'teal', borderRadius: '5px'}}>
         <h2>WALLET :</h2>
         <div id='wallet' style={{float: 'right'}}>
           <Icon name="large rupee sign"/><h2>{wallet}</h2>
         </div>
-      </Segment>
+      </Segment>:''}
       <Segment raised style={{borderColor: 'teal', borderRadius: '5px'}}>
         <Grid columns={2}>
           <Grid.Column>
@@ -100,12 +102,12 @@ function Profile(props) {
       </Segment>
       <Grid columns={2}>
         <Grid.Column>
-          <Header as={Segment} style={{borderRadius:'5px', borderColor:'teal'}}>TOOLS SOLD</Header>
-          <Sell token={token} userName={userName}/>
+          {user === userName? <div><Header as={Segment} style={{borderRadius:'5px', borderColor:'teal'}}>TOOLS SOLD</Header>
+          <Sell token={token} userName={userName}/> </div>:''}
         </Grid.Column>
         <Grid.Column>
-          <Header as={Segment} style={{borderRadius:'5px', borderColor:'teal'}}>TOOLS BOUGHT</Header>
-          <Sell buy token={token} userName={userName}/>
+          {user === userName? <div><Header as={Segment} style={{borderRadius:'5px', borderColor:'teal'}}>TOOLS BOUGHT</Header>
+          <Sell buy token={token} userName={userName}/></div>:''}
         </Grid.Column>
       </Grid>
     </Grid.Column>
